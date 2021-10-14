@@ -1,8 +1,20 @@
 <p>Note content is: {{noteContent}}</p>
 <p [style.background-color]="titleBgColor">The title is {{title}}</p>
 <mat-form-field>
-    <input matInput placeholder="Set Background" [(ngModel)]= "noteContent">
+    <input matInput placeholder="Set Background" [(ngModel)]="noteContent">
 </mat-form-field>
 <button mat-icon-button (click)="buttonClick()"> 
+    <mat-icon>add</mat-icon>
+</button>
+
+<button mat-raised-button (click)="changeButtonColor()" [style.background-color]="btnColor">
+    Click Me
+</button>
+
+<p [ngClass]="className">The class is: {{className}}</p>
+<mat-form-field>
+    <input matInput placeholder="Rename Class" [(ngModel)]="inputName">
+</mat-form-field>
+<button mat-icon-button (click)="changeClass()"> 
     <mat-icon>add</mat-icon>
 </button>
