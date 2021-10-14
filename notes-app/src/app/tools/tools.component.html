@@ -1,0 +1,8 @@
+<p>Note content is: {{noteContent}}</p>
+<p [style.background-color]="titleBgColor">The title is {{title}}</p>
+<mat-form-field>
+    <input matInput placeholder="Set Background" [(ngModel)]= "noteContent">
+</mat-form-field>
+<button mat-icon-button (click)="buttonClick()"> 
+    <mat-icon>add</mat-icon>
+</button>
