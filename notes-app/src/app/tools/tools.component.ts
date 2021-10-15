@@ -7,15 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolsComponent implements OnInit {
 
-  title: string = "Something";
-  titleColor: string = "red";
-  noteContent: string = "";
-  titleBgColor: string = "";
-
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  /*
+  title: string = "Something";
+  titleColor: string = "red";
+  noteContent: string = "";
+  titleBgColor: string = "";
 
   buttonClick(): void{
     //alert("Button click")
@@ -46,4 +47,7 @@ export class ToolsComponent implements OnInit {
     this.className = this.inputName;
     this.inputName = "";
   }
+
+  currDate = Date.now();
+  */
 }

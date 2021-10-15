@@ -14,6 +14,9 @@ import { MatIconModule} from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { AddPipe } from './add.pipe';
+import { FilterComponent } from './filter/filter.component';
+import { MatCardModule } from "@angular/material/card";
 
 
 @NgModule({
@@ -21,7 +24,9 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     Curs3Component,
     NoteComponent,
-    ToolsComponent
+    ToolsComponent,
+    AddPipe,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,8 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
+<!--
 <p>Note content is: {{noteContent}}</p>
-<p [style.background-color]="titleBgColor">The title is {{title}}</p>
+<p [style.background-color]="titleBgColor">The title is {{title | uppercase}}</p>
 <mat-form-field>
     <input matInput placeholder="Set Background" [(ngModel)]="noteContent">
 </mat-form-field>
@@ -7,6 +8,7 @@
     <mat-icon>add</mat-icon>
 </button>
 
+<br>
 <button mat-raised-button (click)="changeButtonColor()" [style.background-color]="btnColor">
     Click Me
 </button>
@@ -18,3 +20,11 @@
 <button mat-icon-button (click)="changeClass()"> 
     <mat-icon>add</mat-icon>
 </button>
+
+<p>Number is: {{2 | add: 10}}</p>
+<p>Current date: {{currDate | date: 'shortDate'}}</p>
+-->
+
+<mat-card class="add-note-card">
+    <button mat-icon-button><mat-icon>add</mat-icon></button>
+ </mat-card> 
