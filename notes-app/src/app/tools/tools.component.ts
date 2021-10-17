@@ -12,18 +12,24 @@ export class ToolsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  /*
+  
   title: string = "Something";
   titleColor: string = "red";
   noteContent: string = "";
-  titleBgColor: string = "";
 
   buttonClick(): void{
     //alert("Button click")
-    //this.title = "Something else";
+    this.title = this.noteContent;
     //this.titleColor = "blue";
-    this.titleBgColor = this.noteContent;
     this.noteContent = "";
+  }
+
+  bgColorInput: string = "";
+  titleBgColor: string = "";
+
+  changeBgColor(): void{
+    this.titleBgColor = this.bgColorInput;
+    this.bgColorInput = "";
   }
 
   // Color changing button
@@ -49,5 +55,7 @@ export class ToolsComponent implements OnInit {
   }
 
   currDate = Date.now();
-  */
+  
+  array: string[] = ["element0", "element1", "element2", "element3", "element4", "element5"];
+  dates: Date[] = [new Date("1/1/2021"), new Date("1/1/2020"), new Date("1/1/2019"), new Date("1/1/2018")];
 }

@@ -17,6 +17,8 @@ import { FormsModule } from '@angular/forms';
 import { AddPipe } from './add.pipe';
 import { FilterComponent } from './filter/filter.component';
 import { MatCardModule } from "@angular/material/card";
+import { CustomPipe } from './custom.pipe';
+import { ColorPipe } from './color.pipe';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { MatCardModule } from "@angular/material/card";
     NoteComponent,
     ToolsComponent,
     AddPipe,
-    FilterComponent
+    FilterComponent,
+    CustomPipe,
+    ColorPipe
   ],
   imports: [
     BrowserModule,

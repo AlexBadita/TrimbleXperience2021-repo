@@ -1,10 +1,18 @@
 <!--
 <p>Note content is: {{noteContent}}</p>
-<p [style.background-color]="titleBgColor">The title is {{title | uppercase}}</p>
+<p [style.background-color]="titleBgColor">The title is {{title}}</p>
 <mat-form-field>
-    <input matInput placeholder="Set Background" [(ngModel)]="noteContent">
+    <input matInput placeholder="Set Title" [(ngModel)]="noteContent">
 </mat-form-field>
 <button mat-icon-button (click)="buttonClick()"> 
+    <mat-icon>add</mat-icon>
+</button>
+
+<p>Color Input is: {{bgColorInput}}</p>
+<mat-form-field>
+    <input matInput placeholder="Set Background" [(ngModel)]="bgColorInput">
+</mat-form-field>
+<button mat-icon-button (click)="changeBgColor()"> 
     <mat-icon>add</mat-icon>
 </button>
 
@@ -23,8 +31,23 @@
 
 <p>Number is: {{2 | add: 10}}</p>
 <p>Current date: {{currDate | date: 'shortDate'}}</p>
+<p>String "{{title}}" to uppercase: {{title | uppercase}}</p>
+
+<div *ngFor="let element of array; let i=index; let even=even;">
+    <p *ngIf="even"> 
+        Index {{i}} : {{element}}
+    </p>
+</div>
+
+<div *ngFor="let element of dates; let i=index; let even=even;">
+    <p *ngIf="even"> 
+        Index {{i}} : {{element | date: 'shortDate'}} 
+    </p>
+</div>
+
+<p [style.color]="'red' | color">{{"text" | custom}}</p>
 -->
 
 <mat-card class="add-note-card">
     <button mat-icon-button><mat-icon>add</mat-icon></button>
- </mat-card> 
+</mat-card> 
