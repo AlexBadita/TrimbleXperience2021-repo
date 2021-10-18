@@ -22,4 +22,18 @@ describe('NoteComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  notes: Note[] = [
+    {
+      id: "Id1",
+      title: "First note",
+      description: "This is the description for the first note"
+    },
+    {
+      id: "Id2",
+      title: "Second note",
+      description: "This is the description for the second note"
+    }
+  ];
+
 });

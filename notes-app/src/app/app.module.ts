@@ -19,6 +19,9 @@ import { FilterComponent } from './filter/filter.component';
 import { MatCardModule } from "@angular/material/card";
 import { CustomPipe } from './custom.pipe';
 import { ColorPipe } from './color.pipe';
+import { AddNoteComponent } from './add-note/add-note.component';
+import { HomeComponent } from './home/home.component';
+import { DummyRouteComponent } from './dummy-route/dummy-route.component';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { ColorPipe } from './color.pipe';
     AddPipe,
     FilterComponent,
     CustomPipe,
-    ColorPipe
+    ColorPipe,
+    AddNoteComponent,
+    HomeComponent,
+    DummyRouteComponent
   ],
   imports: [
     BrowserModule,
