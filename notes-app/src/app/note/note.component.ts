@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NoteService } from '../services/note.service';
 import { Note } from './note';
 
 @Component({
@@ -8,28 +9,20 @@ import { Note } from './note';
   styleUrls: ['./note.component.scss']
 })
 export class NoteComponent implements OnInit {
+  notes: Note[];
 
-  notes: Note[] = [
-    {
-      id: "Id1",
-      title: "First note",
-      description: "This is the description for the first note"
-    },
-    {
-      id: "Id2",
-      title: "Second note",
-      description: "This is the description for the second note"
-    }
-  ];
-
-
-  constructor(private router: Router) { }
+  //constructor(private router: Router) { }
+  constructor(private noteService: NoteService){}
 
   ngOnInit(): void {
+    this.noteService.serviceCall();
+    this.notes = this.noteService.getNotes();
   }
 
+  /*
   showNote(note: any): void {
     this.router.navigate(['/addnote'], {queryParams: {title: note.title, description: note.description}});
   }
+  */
 
 }

@@ -1,12 +1,33 @@
 <h1>Add a note</h1>
-<form class="add-note-form">
+<form class="add-note-form" #form="ngForm">
     <mat-form-field>
-    <input
-        matInput
-        name="inputNote" [(ngModel)]="title"/>
+        <mat-label>Set Title</mat-label>
+        <input matInput placeholder="Ex: Title" name="inputTitle" [(ngModel)]="title" #inputTitle="ngModel" required/>
+        <div *ngIf="inputTitle.invalid && (inputTitle.dirty || inputTitle.touched)">
+            <p *ngIf="inputTitle.errors?.required">
+                Title is required.
+            </p>
+        </div>
     </mat-form-field>
     <mat-form-field>
-        <textarea matInput  name="inputNote" [(ngModel)]="description"></textarea>
+        <mat-label>Set Description</mat-label>
+        <textarea matInput placeholder="Ex: Description" name="inputDescription" [(ngModel)]="description" #inputDescription="ngModel" required></textarea>
+        <div *ngIf="inputDescription.invalid && (inputDescription.dirty || inputDescription.touched)">
+            <p *ngIf="inputDescription.errors?.required">
+                Description is required.
+            </p>
+        </div>
     </mat-form-field>
-    <button mat-button>Add</button>
+    <mat-form-field appearance="fill">
+        <mat-label>Categories</mat-label>
+        <mat-select name="inputCategory" [(ngModel)]="selectedCategory" #inputCategory="ngModel" required>
+            <mat-option *ngFor="let category of categories" [value]="category.name">
+                {{category.name | uppercase}}
+            </mat-option>
+        </mat-select>
+        <div *ngIf="inputCategory.invalid && inputCategory.touched">
+            <p>Category is required.</p>
+        </div>
+    </mat-form-field>
+    <button [disabled]="form.invalid" mat-button (click)="clickAddNote()">Add</button>
 </form>

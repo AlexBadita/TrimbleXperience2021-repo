@@ -1,5 +1,8 @@
-<div *ngFor="let note of notes" class="note-card">
+<div *ngFor="let note of notes"  class="note-card">
+    <!--
     <mat-card (click)="showNote(note)">
+    -->
+    <mat-card class="note-card-content">
         <mat-card-header>
             {{note.title}}
         </mat-card-header>
@@ -7,5 +10,12 @@
         <mat-card-content>
             {{note.description}}
         </mat-card-content>
+
+        <mat-icon>forward</mat-icon>
+        <mat-icon>star_half</mat-icon>
+        <mat-icon>done</mat-icon>
+
+        <mat-icon>edit</mat-icon>
+        <mat-icon>delete</mat-icon>
     </mat-card>
 </div>

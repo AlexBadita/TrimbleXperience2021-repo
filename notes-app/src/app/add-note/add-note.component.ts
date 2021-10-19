@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Category } from '../models/category';
+import { FiltersService } from '../services/filters.service';
+import { NoteService } from '../services/note.service';
 
 @Component({
   selector: 'app-add-note',
@@ -8,16 +11,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AddNoteComponent implements OnInit {
 
-  title: string = "";
-  description: string = "";
+  title: string;
+  description: string;
+  selectedCategory: string;
 
-  constructor(private _activatedRoute: ActivatedRoute) { }
+  categories: Category[];
+
+  constructor(private _activatedRoute: ActivatedRoute, private noteService: NoteService, private filtersService: FiltersService) { }
 
   ngOnInit(): void {
     this._activatedRoute.queryParams.subscribe(params => {
       this.title = params["title"];
       this.description = params["description"];
-    })
+    });
+    this.categories = this.filtersService.getCategories();
   }
 
+  clickAddNote(){
+    console.log(this.selectedCategory);
+    this.noteService.addNote(this.title, this.description, this.selectedCategory);
+  }
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +22,10 @@ import { ColorPipe } from './color.pipe';
 import { AddNoteComponent } from './add-note/add-note.component';
 import { HomeComponent } from './home/home.component';
 import { DummyRouteComponent } from './dummy-route/dummy-route.component';
+import { NoteService } from './services/note.service';
+import { FiltersService } from './services/filters.service';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -49,9 +53,14 @@ import { DummyRouteComponent } from './dummy-route/dummy-route.component';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    MatOptionModule,
+    MatSelectModule
   ],
-  providers: [],
+  providers: [
+    NoteService,
+    FiltersService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
