@@ -1,5 +1,6 @@
 <app-filter (emitSelectedFilter)="reciveCategory($event)"></app-filter>
+<app-search (emitInputSearch)="reciveSearch($event)"></app-search>
 <div class="container-fluid">
-    <app-note [selectedCategoryId]="categoryId"></app-note>
+    <app-note [selectedCategoryId]="categoryId" [selectedInputSearch]="inputSearch"></app-note>
     <app-tools></app-tools>
 </div>

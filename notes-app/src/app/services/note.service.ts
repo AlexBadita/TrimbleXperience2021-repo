@@ -66,6 +66,11 @@ export class NoteService {
     return this.notes.filter(note => note.categoryId === categoryId);
   }
 
+  getSearchedNotes(inputSearch: string){
+    return this.notes.filter(note => note.title.toLowerCase().includes(inputSearch.toLowerCase()) || 
+                                     note.description.toLowerCase().includes(inputSearch.toLowerCase()));
+  }
+
   getBgColors(){
     return this.notesBgColors;
   }

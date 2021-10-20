@@ -13,6 +13,8 @@ export class NoteComponent implements OnInit, OnChanges{
   notes: Note[];
   @Input() selectedCategoryId: string;
 
+  @Input() selectedInputSearch: string;
+
   notesBgColors: NoteBgColor[] = this.noteService.getBgColors();
 
   //constructor(private router: Router) { }
@@ -26,6 +28,9 @@ export class NoteComponent implements OnInit, OnChanges{
   ngOnChanges(): void {
     if(this.selectedCategoryId){
       this.notes = this.noteService.getFiltredNotes(this.selectedCategoryId);
+    }
+    if(this.selectedInputSearch){
+      this.notes = this.noteService.getSearchedNotes(this.selectedInputSearch);
     }
   }
 
