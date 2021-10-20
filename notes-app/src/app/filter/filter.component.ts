@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { Category } from '../models/category';
 import { FiltersService } from '../services/filters.service';
 
@@ -10,6 +10,7 @@ import { FiltersService } from '../services/filters.service';
 export class FilterComponent implements OnInit {
 
   categories: Category[];
+  @Output() emitSelectedFilter = new EventEmitter<string>();
 
   constructor(private filtersService: FiltersService) { }
 
@@ -17,4 +18,7 @@ export class FilterComponent implements OnInit {
     this.categories = this.filtersService.getCategories();
   }
 
+  selectFilter(categoryId: string){
+    this.emitSelectedFilter.emit(categoryId);
+  }
 }

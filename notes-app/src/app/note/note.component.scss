@@ -1,10 +1,25 @@
-.note-card{
-    display: inline-flex;
-    margin: 1%;
-}
-
-.note-card-content{
-    width: 150px;
-    height: 150px;
-    background-color: beige;
+.note-card-container{
+    display: flex;
+    .note-card{
+        margin: 3%;
+        .note-card-content{
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            mat-card-header{
+                font-weight: bold;
+            }
+            .material-icons{
+                font-size: 20px;
+            }
+            .icons{
+                display: flex;
+                .left{
+                }
+                .right{
+                }
+            }
+        }
+    }
 }
