@@ -1,57 +1,44 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { NoteBgColor } from '../models/note-bg-color';
 import { Note } from '../note/note';
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class NoteService {
 
-  idIndex: number = 3;
-  notes: Note[] = [
-    {
-      id: "Id1",
-      title: "First note",
-      description: "This is the description for the first note",
-      categoryId: "1"
-    },
-    {
-      id: "Id2",
-      title: "Second note",
-      description: "This is the description for the second note",
-      categoryId: "2"
-    }
-  ];
+  readonly baseUrl= "https://localhost:4200";
+  readonly httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+    })
+  };
 
-  notesBgColors: NoteBgColor[] = [
-    {
-      noteId: "Id1",
-      bgColor: this.setBackgoundColor()
-    },
-    {
-      noteId: "Id2",
-      bgColor: this.setBackgoundColor()
-    }
-  ];
 
-  constructor(private router: Router) { }
+  notesBgColors: NoteBgColor[] = [];
+
+  constructor(private router: Router, private httpClient: HttpClient) {}
 
   serviceCall() {
     console.log("Note service was called");
   }  
 
-  getNotes(): Note[]{
-    return this.notes;
+  getNotes():Observable<Note[]>{
+    return this.httpClient.get<Note[]>(this.baseUrl + '/notes', this.httpOptions);
   }
 
   addNote(title: string, description: string, categoryId: string){
+    let idIndex = this.httpClient.get<Note[]>(this.baseUrl + '/notes', this.httpOptions).subscribe.length;
+
     let newNote = {
-      id: "Id"+this.idIndex,
+      id: "Id" + idIndex,
       title: title,
       description: description,
       categoryId: categoryId
     };
-    this.notes.push(newNote);
-    this.idIndex += 1;
+    //this.notes.push(newNote);
 
     this.notesBgColors.push({
       noteId: newNote.id,
@@ -59,16 +46,28 @@ export class NoteService {
     });
     
     this.router.navigateByUrl('');
-    console.log(this.notes);
   }
 
-  getFiltredNotes(categoryId: string){
-    return this.notes.filter(note => note.categoryId === categoryId);
+  getFiltredNotes(categoryId: string):Observable<Note[]>{
+    return this.httpClient
+    .get<Note[]>(this.baseUrl + '/notes', this.httpOptions)
+    .pipe(
+      map((notes) => notes.filter((note) => note.categoryId === categoryId))
+    );
+    //return this.notes.filter(note => note.categoryId === categoryId);
   }
 
-  getSearchedNotes(inputSearch: string){
+  getSearchedNotes(inputSearch: string):Observable<Note[]>{
+    return this.httpClient
+    .get<Note[]>(this.baseUrl + '/notes', this.httpOptions)
+    .pipe(
+      map((notes) => notes.filter((note) => note.title.toLowerCase().includes(inputSearch.toLowerCase()) || 
+                                            note.description.toLowerCase().includes(inputSearch.toLowerCase())))
+    );
+    /*
     return this.notes.filter(note => note.title.toLowerCase().includes(inputSearch.toLowerCase()) || 
                                      note.description.toLowerCase().includes(inputSearch.toLowerCase()));
+    */
   }
 
   getBgColors(){

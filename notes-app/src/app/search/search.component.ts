@@ -8,7 +8,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class SearchComponent implements OnInit {
 
   inputSearch: string;
-  @Output() emitInputSearch = new EventEmitter<string>();;
+  displaySearch: string;
+  @Output() emitInputSearch = new EventEmitter<string>();
 
   constructor() { }
 
@@ -17,6 +18,7 @@ export class SearchComponent implements OnInit {
 
   searchString(){
     this.emitInputSearch.emit(this.inputSearch);
+    this.displaySearch = this.inputSearch;
     this.inputSearch = "";
   }
 }

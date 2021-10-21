@@ -1,29 +1,23 @@
 <div class="note-card-container">
-<div *ngFor="let note of notes"  class="note-card">
+    <ng-container *ngFor="let note of notes" class="note-card">
     <!--
     <mat-card (click)="showNote(note)">
     -->
-    <mat-card class="note-card-content" [style.background-color]="getBgColorByNoteId(note.id)">
-        <mat-card-header>
-            {{note.title}}
-        </mat-card-header>
+    <!-- <mat-card class="note-card-content" [style.background-color]="getBgColorByNoteId(note.id)"> -->
+        <mat-card class="note-card-content">
+            <mat-card-header>
+                {{note.title}}
+            </mat-card-header>
 
-        <mat-card-content>
-            {{note.description}}
-        </mat-card-content>
+            <mat-card-content>
+                {{note.description}}
+            </mat-card-content>
         
-        <div class="icons">
-            <div class="left">
-                <mat-icon>forward</mat-icon>
-                <mat-icon>star_half</mat-icon>
-                <mat-icon>done</mat-icon>
-            </div>
-
-            <div class="right">
-                <mat-icon>edit</mat-icon>
-                <mat-icon>delete</mat-icon>
-            </div>
-        </div>
-    </mat-card>
-</div>
+            <mat-icon>forward</mat-icon>
+            <mat-icon>star_half</mat-icon>
+            <mat-icon>done</mat-icon>
+            <mat-icon>edit</mat-icon>
+            <mat-icon>delete</mat-icon>
+        </mat-card>
+    </ng-container>
 </div>

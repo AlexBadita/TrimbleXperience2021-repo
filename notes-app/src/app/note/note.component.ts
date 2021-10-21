@@ -22,15 +22,24 @@ export class NoteComponent implements OnInit, OnChanges{
 
   ngOnInit(): void {
     this.noteService.serviceCall();
-    this.notes = this.noteService.getNotes();
+    //this.notes = this.noteService.getNotes();
+    this.noteService.getNotes().subscribe(result => {
+      this.notes = result;
+    });
   }
 
   ngOnChanges(): void {
     if(this.selectedCategoryId){
-      this.notes = this.noteService.getFiltredNotes(this.selectedCategoryId);
+      this.noteService.getFiltredNotes(this.selectedCategoryId).subscribe(result =>{
+        this.notes = result;
+      });
+      //this.notes = this.noteService.getFiltredNotes(this.selectedCategoryId);
     }
     if(this.selectedInputSearch){
-      this.notes = this.noteService.getSearchedNotes(this.selectedInputSearch);
+      this.noteService.getSearchedNotes(this.selectedInputSearch).subscribe(result =>{
+        this.notes = result;
+      });
+      //this.notes = this.noteService.getSearchedNotes(this.selectedInputSearch);
     }
   }
 
