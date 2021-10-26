@@ -1,0 +1,49 @@
+<div class="add-note">
+    <h1>Add a note</h1>
+    <form class="add-note-form" #form="ngForm">
+        <mat-form-field>
+            <mat-label>Set Title</mat-label>
+            <!-- [(ngModel)] -> two way data binding; sends this field input to the 'title' variable from add-note.component.ts -->
+            <input matInput placeholder="Ex: Title" name="inputTitle" [(ngModel)]="title" #inputTitle="ngModel" required/>
+            <!-- Validation -->
+            <!-- Structural directive, *ngIf, creates a DOM (Document Object Model) if any validation fails -->
+            <div *ngIf="inputTitle.invalid && (inputTitle.dirty || inputTitle.touched)">
+                <p *ngIf="inputTitle.errors?.required">
+                    Title is required.
+                </p>
+            </div>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Set Description</mat-label>
+            <!-- [(ngModel)] -> two way data binding; sends this field input to the 'description' variable from add-note.component.ts -->
+            <textarea matInput placeholder="Ex: Description" name="inputDescription" [(ngModel)]="description" #inputDescription="ngModel" required></textarea>
+            <!-- Validation -->
+            <!-- Structural directive, *ngIf, creates a DOM (Document Object Model) if any validation fails -->
+            <div *ngIf="inputDescription.invalid && (inputDescription.dirty || inputDescription.touched)">
+                <p *ngIf="inputDescription.errors?.required">
+                    Description is required.
+                </p>
+            </div>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Categories</mat-label>
+            <!-- [(ngModel)] -> two way data binding; sends this field choice to the 'selectedCategory' variable from add-note.component.ts -->
+            <mat-select name="inputCategory" [(ngModel)]="selectedCategory" #inputCategory="ngModel" required>
+                <!-- Structural directive, *ngFor, creates a DOM (Document Object Model) element for each element in the 'categories' array from add-note.component.ts -->
+                <mat-option *ngFor="let category of categories" [value]="category.id">
+                    <!-- Pipe that changes category.name string value to uppercase letters before displaying on screen -->
+                    <!-- Interpolation (data binding) for displaying category.name -->
+                    {{category.name | uppercase}}
+                </mat-option>
+            </mat-select>
+            <!-- Validation -->
+            <!-- Structural directive, *ngIf, creates a DOM (Document Object Model) if any validation fails -->
+            <div *ngIf="inputCategory.invalid && inputCategory.touched">
+                <p>Category is required.</p>
+            </div>
+        </mat-form-field>
+        <!-- Button is disabled if any validation fails -->
+        <!-- Event binding that calls 'clickAddNote()' method from add-note.component.ts -->
+        <button [disabled]="form.invalid" mat-button (click)="clickAddNote()">Add</button>
+    </form>
+</div>

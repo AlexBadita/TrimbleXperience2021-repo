@@ -1,0 +1,13 @@
+<p>
+    <!-- Interpolation (data binding) for displaying 'displaySearch' -->
+    <!-- Pipe that changes 'displaySearch' string value to lowercase letters before displaying on screen -->
+    Searching for: {{displaySearch | lowercase}}
+</p>
+<mat-form-field>
+    <!-- [(ngModel)] -> two way data binding; sends this field input to the 'inputSearch' variable from search.component.ts -->
+    <input matInput placeholder="Search" [(ngModel)]="inputSearch">
+</mat-form-field>
+<!-- Event binding that calls 'searchString()' method from search.component.ts -->
+<button mat-raised-button (click)="searchString()">
+    Search
+</button>

@@ -1,0 +1,9 @@
+<div class="filter-container">
+    <!-- Structural directive, *ngFor, creates a DOM (Document Object Model) element for each element in the categories array from filter.component.ts -->
+    <div class="filter-div" *ngFor="let category of categories">
+        <!-- Event binding that calls 'selectFilter()' method from filter.component.ts -->
+        <!-- Interpolation (data binding) for displaying category.name -->
+        <!-- Pipe that changes category.name string value to uppercase letters before displaying on screen -->
+        <button mat-raised-button color="primary" (click)="selectFilter(category.id)">{{category.name | uppercase}}</button>
+    </div>
+</div>
