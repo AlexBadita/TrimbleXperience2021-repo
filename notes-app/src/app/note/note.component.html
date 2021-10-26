@@ -17,7 +17,7 @@
             <mat-icon>star_half</mat-icon>
             <mat-icon>done</mat-icon>
             <mat-icon>edit</mat-icon>
-            <mat-icon>delete</mat-icon>
+            <mat-icon (click)="deleteNote(note.id)">delete</mat-icon>
         </mat-card>
     </ng-container>
 </div>

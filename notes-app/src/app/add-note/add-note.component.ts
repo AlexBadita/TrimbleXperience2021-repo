@@ -28,7 +28,6 @@ export class AddNoteComponent implements OnInit {
   }
 
   clickAddNote(){
-    console.log(this.selectedCategory);
     this.noteService.addNote(this.title, this.description, this.selectedCategory);
   }
 }

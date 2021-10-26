@@ -52,4 +52,11 @@ export class NoteComponent implements OnInit, OnChanges{
   getBgColorByNoteId(noteId: string){
     return this.notesBgColors.filter(bgColor => bgColor.noteId === noteId)[0].bgColor;
   }
+
+  deleteNote(noteId: string){
+    this.noteService.deleteNote(noteId);
+    this.noteService.getNotes().subscribe(result => {
+      this.notes = result;
+    });
+  }
 }

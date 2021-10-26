@@ -30,22 +30,27 @@ export class NoteService {
   }
 
   addNote(title: string, description: string, categoryId: string){
-    let idIndex = this.httpClient.get<Note[]>(this.baseUrl + '/notes', this.httpOptions).subscribe.length;
+    // let newNote = {
+    //   id: "Id" + idIndex,
+    //   title: title,
+    //   description: description,
+    //   categoryId: categoryId
+    // };
+    //this.notes.push(newNote);
 
-    let newNote = {
-      id: "Id" + idIndex,
+    // this.notesBgColors.push({
+    //   noteId: newNote.id,
+    //   bgColor: this.setBackgoundColor()
+    // });
+
+    let note: Note = {
       title: title,
       description: description,
       categoryId: categoryId
-    };
-    //this.notes.push(newNote);
-
-    this.notesBgColors.push({
-      noteId: newNote.id,
-      bgColor: this.setBackgoundColor()
-    });
-    
+    }
     this.router.navigateByUrl('');
+
+    return  this.httpClient.post(this.baseUrl+"/note", note, this.httpOptions).subscribe();
   }
 
   getFiltredNotes(categoryId: string):Observable<Note[]>{
@@ -68,6 +73,10 @@ export class NoteService {
     return this.notes.filter(note => note.title.toLowerCase().includes(inputSearch.toLowerCase()) || 
                                      note.description.toLowerCase().includes(inputSearch.toLowerCase()));
     */
+  }
+
+  deleteNote(noteId: string){
+    return this.httpClient.delete(this.baseUrl + "/note/" + noteId).subscribe();
   }
 
   getBgColors(){
