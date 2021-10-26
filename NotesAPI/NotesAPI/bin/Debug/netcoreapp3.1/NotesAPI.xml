@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NotesAPI</name>
+    </assembly>
+    <members>
+        <member name="M:NotesAPI.Controllers.NotesController.Get">
+            <summary>
+                Returns a list of notes
+            </summary>
+            <returns>return type</returns>
+        </member>
+    </members>
+</doc>
