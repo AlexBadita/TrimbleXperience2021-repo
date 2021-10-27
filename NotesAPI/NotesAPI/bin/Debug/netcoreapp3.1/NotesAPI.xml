@@ -4,10 +4,53 @@
         <name>NotesAPI</name>
     </assembly>
     <members>
+        <member name="M:NotesAPI.Controllers.CategoriesController.Get">
+            <summary>
+                Returns the list of categories
+            </summary>
+            <response code="400">Bad Request</response>
+            <returns></returns>
+        </member>
+        <member name="M:NotesAPI.Controllers.CategoriesController.GetWithParams(System.String)">
+            <summary>
+                Returns a category by id
+            </summary>
+            <response code="400">Bad Request</response>
+            <returns></returns>
+        </member>
+        <member name="M:NotesAPI.Controllers.CategoriesController.Post(NotesAPI.Category)">
+            <summary>
+                Create a new category
+            </summary>
+            <response code="400">Bad Request</response>
+            <returns>return type</returns>
+        </member>
+        <member name="M:NotesAPI.Controllers.CategoriesController.Delete(System.String)">
+            <summary>
+                Delete a category by id
+            </summary>
+            <response code="400">Bad Request</response>
+            <returns></returns>
+        </member>
+        <member name="M:NotesAPI.Controllers.NotesController.GetWithParams(System.String)">
+            <summary>
+                Returns a list of notes
+            </summary>
+            <response code="400">Bad Request</response>
+            <returns>return type</returns>
+        </member>
         <member name="M:NotesAPI.Controllers.NotesController.Get">
             <summary>
                 Returns a list of notes
             </summary>
+            <response code="400">Bad Request</response>
+            <returns>return type</returns>
+        </member>
+        <member name="M:NotesAPI.Controllers.NotesController.Post(NotesAPI.Note)">
+            <summary>
+                Create a new note
+            </summary>
+            <response code="400">Bad Request</response>
             <returns>return type</returns>
         </member>
     </members>

@@ -15,12 +15,34 @@ namespace NotesAPI.Controllers
         /// <summary>
         ///     Returns a list of notes
         /// </summary>
+        /// <response code="400">Bad Request</response>
         /// <returns>return type</returns>
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("{id}")]
+        public IActionResult GetWithParams(string id)
         {
-            return Ok("Note controller works");
+            return Ok(id);
         }
 
+        /// <summary>
+        ///     Returns a list of notes
+        /// </summary>
+        /// <response code="400">Bad Request</response>
+        /// <returns>return type</returns>
+        [HttpGet("")]
+        public IActionResult Get()
+        {
+            return Ok("FROM GET");
+        }
+
+        /// <summary>
+        ///     Create a new note
+        /// </summary>
+        /// <response code="400">Bad Request</response>
+        /// <returns>return type</returns>
+        [HttpPost("")]
+        public IActionResult Post([FromBody] Note bodyContent)
+        {
+            return Ok(bodyContent);
+        }
     }
 }
