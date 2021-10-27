@@ -1,16 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NotesAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CategoriesController: ControllerBase
+    public class CategoriesController : ControllerBase
     {
-        List<Category> categories = new List<Category>() { 
+        List<Category> _categories = new List<Category> {
             new Category(){ Id = "1", Name = "To Do"},
             new Category(){ Id = "2", Name = "Doing"},
             new Category(){ Id = "3", Name = "Done"}
@@ -23,9 +21,9 @@ namespace NotesAPI.Controllers
         /// <response code="400">Bad Request</response>
         /// <returns></returns>
         [HttpGet("")]
-        public IActionResult Get()
+        public IActionResult GetCategory()
         {
-            return Ok(this.categories);
+            return Ok(_categories);
         }
 
         /// <summary>
@@ -34,9 +32,14 @@ namespace NotesAPI.Controllers
         /// <response code="400">Bad Request</response>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public IActionResult GetWithParams(string id)
+        public IActionResult GetCategoryById(string id)
         {
-            return Ok(this.categories.Find(x => x.Id == id));
+            Category resultCategory = _categories.Find(category => category.Id == id);
+            if(resultCategory == null)
+            {
+                return BadRequest("Category Not Found!");
+            }
+            return Ok(resultCategory);
         }
 
         /// <summary>
@@ -45,10 +48,14 @@ namespace NotesAPI.Controllers
         /// <response code="400">Bad Request</response>
         /// <returns>return type</returns>
         [HttpPost("")]
-        public IActionResult Post([FromBody] Category newCategory)
+        public IActionResult AddCategory([FromBody] Category newCategory)
         {
-            this.categories.Add(newCategory);
-            return Ok(this.categories);
+            if(_categories.Find(catetogry => catetogry.Id == newCategory.Id) == null)
+            {
+                return BadRequest("Duplicate Id!");
+            }
+            _categories.Add(newCategory);
+            return Ok(_categories);
         }
 
         /// <summary>
@@ -57,10 +64,15 @@ namespace NotesAPI.Controllers
         /// <response code="400">Bad Request</response>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id)
+        public IActionResult DeleteCategory(string id)
         {
-            this.categories.Remove(this.categories.Find(x => x.Id == id));
-            return Ok(this.categories);
+            Category categoryToDelete = _categories.Find(category => category.Id == id);
+            if (_categories.Contains(categoryToDelete))
+            {
+                _categories.Remove(_categories.Find(category => category.Id == id));
+                return Ok(_categories);
+            }
+            return BadRequest("Category Not Found!");
         }
     }
 }
