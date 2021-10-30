@@ -29,7 +29,6 @@
             <summary>
                 Delete a category by id
             </summary>
-            <response code="400">Bad Request</response>
             <returns></returns>
         </member>
         <member name="M:NotesAPI.Controllers.NotesController.GetNotes">
@@ -60,6 +59,27 @@
             <response code="400">Bad Request</response>
             <returns></returns>
         </member>
+        <member name="M:NotesAPI.Controllers.NotesController.UpdateNote(System.Guid,NotesAPI.Note)">
+            <summary>
+                Update note by id
+            </summary>
+            <response code="400">Bad Request</response>
+            <returns></returns>
+        </member>
+        <member name="M:NotesAPI.Controllers.NotesController.DeleteNote(System.Guid)">
+            <summary>
+                Delete note by id
+            </summary>
+            <response code="404">Not Found</response>
+            <returns></returns>
+        </member>
+        <member name="M:NotesAPI.Controllers.OwnerController.GetOwners">
+            <summary>
+                Get all owners
+            </summary>
+            <response code="400">Bad Request</response>
+            <returns></returns>
+        </member>
         <member name="M:NotesAPI.Controllers.OwnerController.GetOwnerById(System.Guid)">
             <summary>
                 Get owner by id
@@ -70,6 +90,19 @@
         <member name="M:NotesAPI.Controllers.OwnerController.CreateOwner(NotesAPI.Models.Owner)">
             <summary>
                 Add a new owner
+            </summary>
+            <response code="400">Bad Request</response>
+            <returns></returns>
+        </member>
+        <member name="M:NotesAPI.Controllers.OwnerController.DeleteOwner(System.Guid)">
+            <summary>
+                Delete owner by id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NotesAPI.Controllers.OwnerController.UpdateOwner(System.Guid,NotesAPI.Models.Owner)">
+            <summary>
+                Update owner by id
             </summary>
             <response code="400">Bad Request</response>
             <returns></returns>

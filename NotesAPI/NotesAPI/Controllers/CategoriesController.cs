@@ -34,12 +34,12 @@ namespace NotesAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetCategoryById(string id)
         {
-            Category resultCategory = _categories.Find(category => category.Id == id);
-            if(resultCategory == null)
+            int index = _categories.FindIndex(category => category.Id == id);
+            if(index == -1)
             {
                 return BadRequest("Category Not Found!");
             }
-            return Ok(resultCategory);
+            return Ok(_categories[index]);
         }
 
         /// <summary>
@@ -61,18 +61,19 @@ namespace NotesAPI.Controllers
         /// <summary>
         ///     Delete a category by id
         /// </summary>
-        /// <response code="400">Bad Request</response>
         /// <returns></returns>
         [HttpDelete("{id}")]
         public IActionResult DeleteCategory(string id)
         {
-            Category categoryToDelete = _categories.Find(category => category.Id == id);
-            if (_categories.Contains(categoryToDelete))
+            int index = _categories.FindIndex(note => note.Id == id);
+            if (index == -1)
             {
-                _categories.Remove(_categories.Find(category => category.Id == id));
-                return Ok(_categories);
+                return NotFound();
             }
-            return BadRequest("Category Not Found!");
+
+            _categories.RemoveAt(index);
+
+            return NoContent();
         }
     }
 }
