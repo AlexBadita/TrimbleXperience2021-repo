@@ -13,6 +13,7 @@ namespace NotesAPI.Controllers
             new Category(){ Id = "2", Name = "Doing"},
             new Category(){ Id = "3", Name = "Done"}
         };
+
         public CategoriesController() { }
 
         /// <summary>

@@ -27,8 +27,7 @@ import { FiltersService } from './services/filters.service';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { SearchComponent } from './search/search.component';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpMockApiInterceptor } from './services/http-mock-api.interceptor';
+import { HttpClientModule} from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 
@@ -66,13 +65,7 @@ import { CommonModule } from '@angular/common';
   ],
   providers: [
     NoteService,
-    FiltersService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpMockApiInterceptor,
-      multi: true
-    }
-
+    FiltersService
   ],
   bootstrap: [AppComponent]
 })

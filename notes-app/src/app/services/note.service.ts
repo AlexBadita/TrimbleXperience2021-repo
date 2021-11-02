@@ -9,7 +9,7 @@ import { map } from "rxjs/operators";
 @Injectable()
 export class NoteService {
 
-  readonly baseUrl= "https://localhost:4200";
+  readonly baseUrl= "https://localhost:44324";
   readonly httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
@@ -29,7 +29,7 @@ export class NoteService {
     return this.httpClient.get<Note[]>(this.baseUrl + '/notes', this.httpOptions);
   }
 
-  addNote(title: string, description: string, categoryId: string){
+  addNote(title: string, description: string, categoryId: string) : Observable<Note>{
     // let newNote = {
     //   id: "Id" + idIndex,
     //   title: title,
@@ -48,9 +48,9 @@ export class NoteService {
       description: description,
       categoryId: categoryId
     }
-    this.router.navigateByUrl('');
+    //this.router.navigateByUrl('');
 
-    return  this.httpClient.post(this.baseUrl+"/note", note, this.httpOptions).subscribe();
+    return  this.httpClient.post<Note>(this.baseUrl+"/notes", note, this.httpOptions);
   }
 
   getFiltredNotes(categoryId: string):Observable<Note[]>{
@@ -76,7 +76,7 @@ export class NoteService {
   }
 
   deleteNote(noteId: string){
-    return this.httpClient.delete(this.baseUrl + "/note/" + noteId).subscribe();
+    return this.httpClient.delete(this.baseUrl + "/notes/" + noteId);
   }
 
   getBgColors(){

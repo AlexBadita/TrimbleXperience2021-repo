@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using NotesAPI.Services;
+using NotesAPI.Settings;
 using System;
 using System.IO;
 using System.Reflection;
@@ -22,6 +24,14 @@ namespace NotesAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -31,11 +41,20 @@ namespace NotesAPI
             });
             services.AddSingleton<INoteCollectionService, NoteCollectionService>();
             services.AddSingleton<IOwnerService, OwnerService>();
+            //services.AddTransient
+            //services.AddScoped
+            services.Configure<MongoDBSettings>(Configuration.GetSection(nameof(MongoDBSettings)));
+            services.AddSingleton<IMongoDBSettings>(sp => sp.GetRequiredService<IOptions<MongoDBSettings>>().Value);
+
+            services.Configure<MongoDBOwnerSettings>(Configuration.GetSection(nameof(MongoDBOwnerSettings)));
+            services.AddSingleton<IMongoDBOwnerSettings>(sp => sp.GetRequiredService<IOptions<MongoDBOwnerSettings>>().Value);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("CorsPolicy");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

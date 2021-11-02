@@ -2,6 +2,7 @@
 using NotesAPI.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NotesAPI.Controllers
 {
@@ -22,9 +23,10 @@ namespace NotesAPI.Controllers
         /// <response code="400">Bad Request</response>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult GetNotes()
+        public async Task<IActionResult> GetNotes()
         {
-            return Ok(_noteCollectionService.GetAll());
+            List<Note> notes = await _noteCollectionService.GetAll();
+            return Ok(notes);
         }
 
         /// <summary>
@@ -33,14 +35,14 @@ namespace NotesAPI.Controllers
         /// <response code="400">Bad Request</response>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CreateNote([FromBody] Note note)
+        public async Task<IActionResult> CreateNote([FromBody] Note note)
         {
             if (note == null)
             {
                 return BadRequest("Note cannot be null!");
             }
 
-            if (_noteCollectionService.Create(note))
+            if (await _noteCollectionService.Create(note))
             {
                 return CreatedAtRoute("GetNote", new { id = note.Id.ToString() }, note);
             }
@@ -53,14 +55,14 @@ namespace NotesAPI.Controllers
         /// <response code="400">Bad Request</response>
         /// <returns></returns>
         [HttpGet("OwnerId/{ownerId}")]
-        public IActionResult GetNotesByOwnerId(Guid ownerId)
+        public async Task<IActionResult> GetNotesByOwnerId(Guid ownerId)
         {
             if(ownerId == null)
             {
                 return BadRequest("Id cannot be null!");
             }
 
-            List<Note> notesByOwner = _noteCollectionService.GetNotesByOwnerId(ownerId);
+            List<Note> notesByOwner = await _noteCollectionService.GetNotesByOwnerId(ownerId);
             if (notesByOwner.Count > 0)
             {
                 return NoContent();
@@ -75,14 +77,14 @@ namespace NotesAPI.Controllers
         /// <response code="400">Bad Request</response>
         /// <returns></returns>
         [HttpGet("{id}", Name = "GetNote")]
-        public IActionResult GetNotesById(Guid id)
+        public async Task<IActionResult> GetNotesById(Guid id)
         {
             if (id == null)
             {
                 return BadRequest("Id cannot be null!");
             }
 
-            Note note = _noteCollectionService.Get(id);
+            Note note = await _noteCollectionService.Get(id);
             if (note == null)
             {
                 return NoContent();
@@ -97,14 +99,14 @@ namespace NotesAPI.Controllers
         /// <response code="400">Bad Request</response>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public IActionResult UpdateNote(Guid id, [FromBody] Note note)
+        public async Task<IActionResult> UpdateNote(Guid id, [FromBody] Note note)
         {
             if (note == null)
             {
                 return BadRequest("Note cannot be null");
             }
 
-            if (_noteCollectionService.Update(id, note))
+            if (await _noteCollectionService.Update(id, note))
             {
                 return Ok(_noteCollectionService.Get(id));
             }
@@ -118,14 +120,14 @@ namespace NotesAPI.Controllers
         /// <response code="404">Not Found</response>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public IActionResult DeleteNote(Guid id)
+        public async Task<IActionResult> DeleteNote(Guid id)
         {
             if (id == null)
             {
                 return BadRequest("Id cannot be null!");
             }
 
-            if (_noteCollectionService.Delete(id))
+            if (await _noteCollectionService.Delete(id))
             {
                 return NoContent();
             }

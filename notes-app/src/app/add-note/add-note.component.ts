@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../models/category';
 import { FiltersService } from '../services/filters.service';
 import { NoteService } from '../services/note.service';
@@ -17,7 +17,7 @@ export class AddNoteComponent implements OnInit {
 
   categories: Category[];
 
-  constructor(private _activatedRoute: ActivatedRoute, private noteService: NoteService, private filtersService: FiltersService) { }
+  constructor(private _activatedRoute: ActivatedRoute, private noteService: NoteService, private filtersService: FiltersService, private router: Router) { }
 
   ngOnInit(): void {
     this._activatedRoute.queryParams.subscribe(params => {
@@ -28,6 +28,8 @@ export class AddNoteComponent implements OnInit {
   }
 
   clickAddNote(){
-    this.noteService.addNote(this.title, this.description, this.selectedCategory);
+    this.noteService
+      .addNote(this.title, this.description, this.selectedCategory)
+      .subscribe(() => this.router.navigateByUrl(''));
   }
 }

@@ -25,9 +25,10 @@ namespace NotesAPI.Controllers
         /// <response code="400">Bad Request</response>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult GetOwners()
+        public async Task<IActionResult> GetOwners()
         {
-            return Ok(_ownerService.GetAll());
+            List<Owner> owners = await _ownerService.GetAll();
+            return Ok(owners);
         }
 
         /// <summary>
@@ -36,14 +37,14 @@ namespace NotesAPI.Controllers
         /// <response code="400">Bad Request</response>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public IActionResult GetOwnerById(Guid id)
+        public async Task<IActionResult> GetOwnerById(Guid id)
         {
             if (id == null)
             {
                 return BadRequest("Id cannot be null!");
             }
 
-            Owner owner = _ownerService.Get(id);
+            Owner owner = await _ownerService.Get(id);
             if (owner == null)
             {
                 return NoContent();
@@ -58,14 +59,14 @@ namespace NotesAPI.Controllers
         /// <response code="400">Bad Request</response>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CreateOwner([FromBody] Owner owner)
+        public async Task<IActionResult> CreateOwner([FromBody] Owner owner)
         {
             if (owner == null)
             {
                 return BadRequest("Owner cannot be null!");
             }
 
-            if (_ownerService.Create(owner))
+            if (await _ownerService.Create(owner))
             {
                 return Ok("Owner added successfully!");
             }
@@ -78,14 +79,14 @@ namespace NotesAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public IActionResult DeleteOwner(Guid id)
+        public async Task<IActionResult> DeleteOwner(Guid id)
         {
             if (id == null)
             {
                 return BadRequest("Id cannot be null!");
             }
 
-            if (_ownerService.Delete(id))
+            if (await _ownerService.Delete(id))
             {
                 return NoContent();
             }
@@ -99,14 +100,14 @@ namespace NotesAPI.Controllers
         /// <response code="400">Bad Request</response>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public IActionResult UpdateOwner(Guid id, [FromBody] Owner owner)
+        public async Task<IActionResult> UpdateOwner(Guid id, [FromBody] Owner owner)
         {
             if (owner == null)
             {
                 return BadRequest("Owner cannot be null");
             }
 
-            if (_ownerService.Update(id, owner))
+            if (await _ownerService.Update(id, owner))
             {
                 return Ok(_ownerService.Get(id));
             }
